@@ -20,10 +20,7 @@ const Home = () => {
   <li >
     <Link href="/plantpots">Chairs</Link>
   </li>
-  <li >
-    <Link href="/plantpots">Crockery</Link>
-  </li>
- 
+  
   
 </ul> 
 <br />
