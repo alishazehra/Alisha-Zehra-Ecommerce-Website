@@ -1,10 +1,12 @@
 
 
+
 "use client";
 
 import React, { useEffect, useState } from "react";
 import { createClient } from "@sanity/client";
 import Image from "next/image";
+import Link from 'next/link'; // Import Link to use navigation links
 
 // Sanity client configuration
 const sanity = createClient({
@@ -83,6 +85,26 @@ const ProductCards: React.FC = () => {
 
   return (
     <div className="p-4">
+      {/* Avion Header and Navigation */}
+      <div>
+        <h1 className="sm:text-xl md:text-2xl lg:text-3xl text-center font-bold">Avion</h1>
+        <ul className="text-gray-500 sm:text-xl md:text-2xl lg:text-4xl flex justify-center items-center gap-2 mt-4">
+          <li className="hover:text-blue-600 transition-colors duration-200">
+            <Link href="/plantpots">PlantPots</Link>
+          </li>
+          <li className="hover:text-blue-600 transition-colors duration-200">
+            <Link href="/ceramics">Ceramics</Link>
+          </li>
+          <li className="hover:text-blue-600 transition-colors duration-200">
+            <Link href="/tables">Tables</Link>
+          </li>
+          <li className="hover:text-blue-600 transition-colors duration-200">
+            <Link href="/chairs">Chairs</Link>
+          </li>
+        </ul>
+      </div>
+
+      {/* Product Cards */}
       <h2 className="text-center text-slate-800 mt-4 mb-4 text-xl md:text-2xl font-semibold">Products from API&apos;s Data</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
