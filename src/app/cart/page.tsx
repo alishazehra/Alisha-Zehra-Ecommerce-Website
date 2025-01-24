@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -31,6 +33,7 @@ interface Product {
 const ProductCards: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [cart, setCart] = useState<Product[]>([]);
+  const [cartOpen, setCartOpen] = useState<boolean>(false); // State for toggling the cart view
 
   // Fetch products from Sanity API using the GROQ query
   const fetchProducts = async () => {
@@ -62,6 +65,11 @@ const ProductCards: React.FC = () => {
   const addToCart = (product: Product) => {
     setCart((prevCart) => [...prevCart, product]);
     alert(`${product.name} has been added to cart`);
+  };
+
+  // Toggle cart visibility
+  const toggleCart = () => {
+    setCartOpen((prevState) => !prevState);
   };
 
   // Truncate description if it's too long
@@ -158,6 +166,65 @@ const ProductCards: React.FC = () => {
           <p className="text-black text-center">Your Cart is empty. Please add products.</p>
         )}
       </div>
+
+      {/* Cart Icon */}
+      <div className="absolute top-4 right-4">
+        <div
+          className="cursor-pointer"
+          style={{
+            fontSize: "2rem", // Adjust the size of the cart icon
+            color: "black",   // Make the cart icon dark black
+          }}
+          onClick={toggleCart} // Click to toggle cart view
+        >
+          🛒
+        </div>
+        {/* Cart count notification (shows '0' if the cart is empty) */}
+        <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+          {cart.length === 0 ? "0" : cart.length}
+        </span>
+      </div>
+
+      {/* Cart Details (Only show if cart is open) */}
+      {cartOpen && (
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 z-10 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-md w-96 max-h-[80vh] overflow-auto">
+            <h2 className="text-xl font-bold mb-4">Cart Items</h2>
+            {cart.length === 0 ? (
+              // Show empty cart message when no products are added
+              <p className="text-black text-center">Your Cart is empty. Please add products.</p>
+            ) : (
+              <ul className="space-y-4">
+                {cart.map((item, index) => (
+                  <li key={index} className="flex justify-between items-center p-4 shadow-sm rounded-md">
+                    <div>
+                      <p className="font-medium text-slate-900">{item.name}</p>
+                      <p className="text-sm text-blue-600">${item.price.toFixed(2)}</p>
+                    </div>
+                    {item.image?.asset?.url ? (
+                      <Image
+                        src={item.image.asset.url}
+                        alt={item.name}
+                        width={50}
+                        height={50}
+                        className="rounded-md"
+                      />
+                    ) : (
+                      <div className="w-12 h-12 bg-gray-300 rounded-md"></div>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <button
+              className="w-full bg-blue-600 text-white py-2 rounded-md mt-4 hover:bg-blue-700"
+              onClick={toggleCart} // Close the cart
+            >
+              Close Cart
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
