@@ -83,7 +83,7 @@ const ProductCards: React.FC = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-center text-slate-800 mt-4 mb-4">Products from API&apos;s Data</h2>
+      <h2 className="text-center text-slate-800 mt-4 mb-4 text-xl md:text-2xl font-semibold">Products from API&apos;s Data</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <div
@@ -106,7 +106,7 @@ const ProductCards: React.FC = () => {
             )}
             <div className="mt-4">
               <h2 className="text-lg font-semibold">{product.name}</h2>
-              <p className="text-slate-800 mt-2 text-sm">{truncateDescription(product.description)}</p>
+              <p className="text-slate-800 mt-2 text-sm md:text-base">{truncateDescription(product.description)}</p>
               <div className="flex justify-between items-center mt-4">
                 <p className="text-slate-600 font-bold">${product.price.toFixed(2)}</p>
                 {product.discountPercentage > 0 && (
