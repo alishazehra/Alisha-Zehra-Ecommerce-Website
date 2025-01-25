@@ -93,13 +93,13 @@ const ProductCards: React.FC = () => {
             <Link href="/plantpots">PlantPots</Link>
           </li>
           <li className="hover:text-blue-600 transition-colors duration-200">
-            <Link href="/ceramics">Ceramics</Link>
+            <Link href="/plantpots">Ceramics</Link>
           </li>
           <li className="hover:text-blue-600 transition-colors duration-200">
-            <Link href="/tables">Tables</Link>
+            <Link href="/plantpots">Tables</Link>
           </li>
           <li className="hover:text-blue-600 transition-colors duration-200">
-            <Link href="/chairs">Chairs</Link>
+            <Link href="/plantpots">Chairs</Link>
           </li>
         </ul>
       </div>
