@@ -1,5 +1,6 @@
 
 
+
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -40,6 +41,7 @@ const ProductCards: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>(""); // State for search input
   const [wishlistOpen, setWishlistOpen] = useState<boolean>(false); // Wishlist modal visibility
   const [signupOpen, setSignupOpen] = useState<boolean>(false); // Signup form visibility
+  const [signupSuccess, setSignupSuccess] = useState<boolean>(false); // State to track successful signup
 
   // Fetch products from Sanity API using the GROQ query
   const fetchProducts = async () => {
@@ -102,6 +104,13 @@ const ProductCards: React.FC = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  // Handle form submission
+  const handleSignupSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    // After form submission, set signup success to true
+    setSignupSuccess(true);
+  };
 
   return (
     <div className="p-4">
@@ -283,9 +292,18 @@ const ProductCards: React.FC = () => {
                 ))}
               </ul>
             )}
+            
+            {/* Add the Payment Button here */}
+            <button
+              className="w-full bg-green-600 text-white py-2 rounded-md mt-4 hover:bg-green-700"
+              onClick={() => setSignupOpen(true)} // Open signup form
+            >
+              Pay with Easypaisa
+            </button>
+
             <button
               className="w-full bg-blue-600 text-white py-2 rounded-md mt-4 hover:bg-blue-700"
-              onClick={toggleCart}
+              onClick={toggleCart} // Close cart
             >
               Close Cart
             </button>
@@ -330,11 +348,11 @@ const ProductCards: React.FC = () => {
         </button>
 
         {/* Signup Form */}
-        {signupOpen && (
+        {signupOpen && !signupSuccess && (
           <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center z-20">
             <div className="bg-white p-6 rounded-lg shadow-md w-96 max-h-[80vh] overflow-auto">
               <h2 className="text-xl font-bold mb-4">Signup</h2>
-              <form>
+              <form onSubmit={handleSignupSubmit}>
                 <div className="mb-4">
                   <input
                     type="email"
@@ -361,6 +379,22 @@ const ProductCards: React.FC = () => {
                 onClick={() => setSignupOpen(false)} // Close signup form
               >
                 Cancel
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Success Message after Signup */}
+        {signupSuccess && (
+          <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center z-20">
+            <div className="bg-white p-6 rounded-lg shadow-md w-96">
+              <h2 className="text-xl font-bold mb-4">Success!</h2>
+              <p className="text-green-600">Your signup request has been received. We'll process it shortly.</p>
+              <button
+                className="w-full mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+                onClick={() => setSignupSuccess(false)} // Hide success message
+              >
+                Close
               </button>
             </div>
           </div>
@@ -399,6 +433,3 @@ const ProductCards: React.FC = () => {
 };
 
 export default ProductCards;
-
-
-
