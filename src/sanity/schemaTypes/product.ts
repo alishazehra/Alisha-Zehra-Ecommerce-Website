@@ -20,6 +20,18 @@ export const product = defineType({
             validation: (rule) => rule.required(),
             type: "string"
         }),
+        {
+            name: 'slug',
+            title: 'Slug',
+            type: 'slug',
+            options: {
+              source: 'name',
+              maxLength: 96,
+            },
+          },
+          
+        
+
         defineField({
             name: "slug",
             title: "Slug",

@@ -4,8 +4,8 @@ import ProductCards from './cart/page'
 const Home = () => {
   return (
     <div>
-      
-    <ProductCards/>
+     
+      <ProductCards/>  
     </div>
   )
 }
