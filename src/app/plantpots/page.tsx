@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from 'react';
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
@@ -45,11 +45,12 @@ const ProductsPage = () => {
 
   return (
     <section className="px-4 md:px-8 py-12 text-[#2A254B] mt-12">
-      <h1 className="text-2xl font-semibold md:text-3xl">New Ceramics</h1>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
+      <h1 className="text-2xl font-semibold md:text-3xl text-center">New Ceramics</h1>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 mt-12">
         {loading ? (
           <div className="col-span-4 flex justify-center items-center">
-            
+            {/* Loading Spinner */}
+            <div className="w-8 h-8 border-4 border-t-4 border-gray-300 border-t-[#2A254B] rounded-full animate-spin"></div>
           </div>
         ) : currentProducts.length > 0 ? (
           currentProducts.map((product) => (
@@ -66,7 +67,6 @@ const ProductsPage = () => {
               <div className="my-4 text-[#2A254B]">
                 <p className="py-2 text-sm sm:text-base">{product.name}</p>
                 <p className="text-lg font-semibold">${product.price}</p>
-                
               </div>
             </div>
           ))
@@ -78,7 +78,7 @@ const ProductsPage = () => {
       {/* 🔹 Pagination Controls with Page Numbers */}
       <div className="flex justify-center mt-8 space-x-4">
         <button
-          className={`px-4 py-2 border rounded-md ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"}`}
+          className={`px-4 py-2 border rounded-md text-sm sm:text-base ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"}`}
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
         >
@@ -90,7 +90,7 @@ const ProductsPage = () => {
           {Array.from({ length: totalPages }, (_, index) => (
             <button
               key={index}
-              className={`px-3 py-2 border rounded-md ${currentPage === index + 1 ? "bg-[#2A254B] text-white" : "hover:bg-gray-200"}`}
+              className={`px-3 py-2 border rounded-md text-sm sm:text-base ${currentPage === index + 1 ? "bg-[#2A254B] text-white" : "hover:bg-gray-200"}`}
               onClick={() => setCurrentPage(index + 1)}
             >
               {index + 1}
@@ -99,7 +99,7 @@ const ProductsPage = () => {
         </div>
 
         <button
-          className={`px-4 py-2 border rounded-md ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"}`}
+          className={`px-4 py-2 border rounded-md text-sm sm:text-base ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"}`}
           onClick={() => setCurrentPage((prev) => prev + 1)}
           disabled={currentPage === totalPages}
         >

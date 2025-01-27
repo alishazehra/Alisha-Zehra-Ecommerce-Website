@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -106,20 +107,12 @@ const ProductCards: React.FC = () => {
     <div className="p-4">
       {/* Avion Header and Navigation */}
       <div>
-        <h1 className="sm:text-xl md:text-2xl lg:text-3xl text-center font-bold">Avion</h1>
-        <ul className="text-gray-500 sm:text-xl md:text-2xl lg:text-4xl flex justify-center items-center gap-2 mt-4">
-          <li className="hover:text-blue-600 transition-colors duration-200">
-            <Link href="/plantpots">PlantPots</Link>
-          </li>
-          <li className="hover:text-blue-600 transition-colors duration-200">
-            <Link href="/plantpots">Ceramics</Link>
-          </li>
-          <li className="hover:text-blue-600 transition-colors duration-200">
-            <Link href="/plantpots">Tables</Link>
-          </li>
-          <li className="hover:text-blue-600 transition-colors duration-200">
-            <Link href="/plantpots">Chairs</Link>
-          </li>
+        <h1 className="text-center text-3xl font-bold">Avion</h1>
+        <ul className="flex justify-center gap-6 mt-4 text-lg text-gray-500">
+          <li className="hover:text-blue-600"><Link href="/plantpots">PlantPots</Link></li>
+          <li className="hover:text-blue-600"><Link href="/plantpots">Ceramics</Link></li>
+          <li className="hover:text-blue-600"><Link href="/plantpots">Tables</Link></li>
+          <li className="hover:text-blue-600"><Link href="/plantpots">Chairs</Link></li>
         </ul>
       </div>
 
@@ -130,19 +123,18 @@ const ProductCards: React.FC = () => {
           placeholder="Search products..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-80 p-2 border border-gray-300 rounded-md"
+          className="w-full max-w-xs p-2 border border-gray-300 rounded-md"
         />
       </div>
 
       {/* Product Cards */}
-      <h2 className="text-center text-slate-800 mt-4 mb-4 text-xl md:text-2xl font-semibold">Products from API&apos;s Data</h2>
+      <h2 className="text-center text-xl font-semibold mt-4 mb-4">Products from API's Data</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredProducts.map((product) => (
           <div
             key={product._id}
             className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300"
           >
-            {/* Render Image component only if imageUrl is valid */}
             {product.image?.asset?.url ? (
               <Image
                 src={product.image.asset.url}
@@ -169,10 +161,7 @@ const ProductCards: React.FC = () => {
 
             <div className="mt-2 flex flex-wrap gap-2">
               {product.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="text-xs bg-slate-400 text-black rounded-full px-2 py-1"
-                >
+                <span key={index} className="text-xs bg-slate-400 text-black rounded-full px-2 py-1">
                   {tag}
                 </span>
               ))}
@@ -203,10 +192,9 @@ const ProductCards: React.FC = () => {
         <div
           className="cursor-pointer relative"
           style={{ fontSize: "2rem", color: "black" }}
-          onClick={toggleCart} // This will now toggle cart visibility
+          onClick={toggleCart}
         >
           🛒
-          {/* Cart count notification */}
           <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
             {cart.length === 0 ? "0" : cart.length}
           </span>
@@ -219,7 +207,6 @@ const ProductCards: React.FC = () => {
           onClick={toggleWishlist}
         >
           ❤️
-          {/* Wishlist count notification */}
           <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
             {wishlist.length === 0 ? "0" : wishlist.length}
           </span>
@@ -258,7 +245,7 @@ const ProductCards: React.FC = () => {
             )}
             <button
               className="w-full bg-blue-600 text-white py-2 rounded-md mt-4 hover:bg-blue-700"
-              onClick={toggleWishlist} // Close the wishlist
+              onClick={toggleWishlist}
             >
               Close Wishlist
             </button>
@@ -298,14 +285,14 @@ const ProductCards: React.FC = () => {
             )}
             <button
               className="w-full bg-blue-600 text-white py-2 rounded-md mt-4 hover:bg-blue-700"
-              onClick={toggleCart} // Close the cart
+              onClick={toggleCart}
             >
               Close Cart
             </button>
           </div>
         </div>
       )}
-      
+
       {/* Cart Summary at the bottom */}
       <div className="mt-8 bg-slate-100 p-6 rounded-lg shadow-md">
         <h2 className="text-lg font-bold text-red-600">Cart Summary</h2>
@@ -367,13 +354,12 @@ const ProductCards: React.FC = () => {
                   className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
                 >
                   Sign Up
-                  
                 </button>
               </form>
               <button
                 className="w-full mt-4 text-center text-sm text-red-600"
                 onClick={() => setSignupOpen(false)} // Close signup form
-              > 
+              >
                 Cancel
               </button>
             </div>
@@ -381,37 +367,38 @@ const ProductCards: React.FC = () => {
         )}
       </div>
 
-
-<br />
-  <div><footer className="bg-gray-800 text-white py-8">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <div className="footer-section">
-            <h4 className="text-xl font-bold mb-4">About Us</h4>
-            <p className="text-sm">Learn more about our company, our mission, and values.</p>
-          </div>
-          <div className="footer-section">
-            <h4 className="text-xl font-bold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:underline">Home</a></li>
-              <li><a href="#" className="hover:underline">Shop</a></li> <li><a href="#" className="hover:underline">About</a></li>
-              <li><a href="#" className="hover:underline">Contact</a></li>
-            </ul>
-          </div>
-          <div className="footer-section">
-            <h4 className="text-xl font-bold mb-4">Contact Info</h4>
-            <p className="text-sm">Email: support@yourstore.com</p>
-            <p className="text-sm">Phone: +1 (800) 123-4567</p>
+      <footer className="bg-gray-800 text-white py-8">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <div className="footer-section">
+              <h4 className="text-xl font-bold mb-4">About Us</h4>
+              <p className="text-sm">Learn more about our company, our mission, and values.</p>
+            </div>
+            <div className="footer-section">
+              <h4 className="text-xl font-bold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-sm">
+                <li><a href="#" className="hover:underline">Home</a></li>
+                <li><a href="#" className="hover:underline">Shop</a></li>
+                <li><a href="#" className="hover:underline">About</a></li>
+                <li><a href="#" className="hover:underline">Contact</a></li>
+              </ul>
+            </div>
+            <div className="footer-section">
+              <h4 className="text-xl font-bold mb-4">Contact Info</h4>
+              <p className="text-sm">Email: support@yourstore.com</p>
+              <p className="text-sm">Phone: +1 (800) 123-4567</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="bg-gray-700 text-center py-4 mt-8">
-        <p className="text-sm">&copy; 2025 YourStore. All rights reserved.</p>
-      </div>
-    </footer></div>
+        <div className="bg-gray-700 text-center py-4 mt-8">
+          <p className="text-sm">&copy; 2025 YourStore. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 };
 
 export default ProductCards;
+
+
 
