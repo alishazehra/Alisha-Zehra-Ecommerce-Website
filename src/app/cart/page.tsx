@@ -446,11 +446,14 @@ const sanity = createClient({
   useCdn: true,
 });
 
-// Product interface for TypeScript
-interface Product {
-  slug: string; // Updated type from `any` to `string`
+//Product interface for TypeScript
+ export interface Product {
+    // slug: string; // Updated type from `any` to `string`
   _id: string;
   name: string;
+  slug: {
+    current: string;
+  };
   price: number;
   description: string;
   discountPercentage: number;
@@ -460,8 +463,14 @@ interface Product {
       url: string;
     };
   };
-  tags: string[];
+  tags: string[]; 
+  
 }
+
+
+
+
+
 
 const ProductCards: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -481,6 +490,7 @@ const ProductCards: React.FC = () => {
           _id,
           name,
           price,
+          slug,
           description,
           discountPercentage,
           image {
@@ -489,7 +499,8 @@ const ProductCards: React.FC = () => {
               url
             }
           },
-          tags
+          tags,
+          
         }
       `;
       const data = await sanity.fetch(query);
@@ -502,13 +513,15 @@ const ProductCards: React.FC = () => {
   // Add product to cart
   const addToCart = (product: Product) => {
     setCart((prevCart) => [...prevCart, product]);
-    alert(`${product.name} has been added to cart`);
+    alert(`${product.name} has been added to cart  
+    View your Cart!`);
   };
 
   // Add product to wishlist
   const addToWishlist = (product: Product) => {
     setWishlist((prevWishlist) => [...prevWishlist, product]);
-    alert(`${product.name} has been added to wishlist`);
+    alert(`${product.name} has been added to wishlist,
+       View your Wishlist!`);
   };
 
   // Toggle cart visibility
@@ -570,10 +583,10 @@ const ProductCards: React.FC = () => {
       <h2 className="text-center text-xl font-semibold mt-4 mb-4">Products from API&apos;s Data</h2> {/* Updated with &apos; */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredProducts.map((product) => (
-          <div
-            key={product._id}
+         <div
+                    key={product._id}
             className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300"
-          >
+            > <Link href={`/product/${product.slug.current}`}>
             {product.image?.asset?.url ? (
               <Image
                 src={product.image.asset.url}
@@ -581,30 +594,36 @@ const ProductCards: React.FC = () => {
                 width={300}
                 height={300}
                 className="w-full h-48 object-cover rounded-md"
-              />
+              /> 
+              
             ) : (
               <div className="w-full h-48 bg-gray-300 rounded-md flex items-center justify-center">
                 <span>No Image Available</span>
-              </div>
-            )}
-            <div className="mt-4">
-              <h2 className="text-lg font-semibold">{product.name}</h2>
-              <p className="text-slate-800 mt-2 text-sm md:text-base">{truncateDescription(product.description)}</p>
+                           
+                </div>  
+              
+              )} </Link>
+    {/* </div>  */}
+            {/* )}  */}
+            
+            <div className="mt-4"> <Link href={`/product/${product.slug.current}`}>
+                <h2 className="text-lg font-semibold">{product.name}</h2> 
+              <p className="text-slate-800 mt-2 text-sm md:text-base">{truncateDescription(product.description)}</p> 
               <div className="flex justify-between items-center mt-4">
                 <p className="text-slate-600 font-bold">${product.price.toFixed(2)}</p>
                 {product.discountPercentage > 0 && (
-                  <p className="text-sm text-green-600">{product.discountPercentage}% OFF</p>
-                )}
-              </div>
+                  <p className="text-sm text-green-600">{product.discountPercentage}% OFF</p> 
+                )} 
+              </div> </Link>
             </div>
 
-            <div className="mt-2 flex flex-wrap gap-2">
+            <div className="mt-2 flex flex-wrap gap-2"> 
               {product.tags.map((tag, index) => (
                 <span key={index} className="text-xs bg-slate-400 text-black rounded-full px-2 py-1">
-                  {tag}
-                </span>
+             {tag}
+                </span> 
               ))}
-            </div>
+            </div> 
 
             {/* Add to cart button */}
             <button
@@ -700,7 +719,8 @@ const ProductCards: React.FC = () => {
             {cart.length === 0 ? (
               <p className="text-black text-center">Your Cart is empty. Please add products.</p>
             ) : (
-              <ul className="space-y-4">
+              <ul className="space-y-4">  
+                  {/* {tag} */}
                 {cart.map((item, index) => (
                   <li key={index} className="flex justify-between items-center p-4 shadow-sm rounded-md">
                     <div>
@@ -720,7 +740,7 @@ const ProductCards: React.FC = () => {
                     )}
                   </li>
                 ))}
-              </ul>
+             </ul>
             )}
             
             {/* Add the Payment Button here */}
@@ -745,7 +765,7 @@ const ProductCards: React.FC = () => {
       <div className="mt-8 bg-slate-100 p-6 rounded-lg shadow-md">
         <h2 className="text-lg font-bold text-red-600">Cart Summary</h2>
         {cart.length > 0 ? (
-          <ul className="space-y-4">
+          <ul className="space-y-4"> 
             {cart.map((item, index) => (
               <li key={index} className="flex justify-between items-center shadow-sm p-4 rounded-md">
                 <div>
@@ -765,7 +785,7 @@ const ProductCards: React.FC = () => {
                 )}
               </li>
             ))}
-          </ul>
+          </ul> 
         ) : (
           <p className="text-black text-center">Your Cart is empty. Please add products.</p>
         )}
@@ -831,7 +851,7 @@ const ProductCards: React.FC = () => {
         )}
       </div>
 
-      <footer className="bg-gray-800 text-white py-8">
+      <footer className="bg-gray-900 text-white py-8">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             <div className="footer-section">
