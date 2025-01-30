@@ -850,7 +850,14 @@ const ProductCards: React.FC = () => {
           </div>
         )}
       </div>
+<div><div className="max-w-7xl- mx-auto px-4"><div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+     
 
+     
+      
+           
+    </div>
+    </div></div>
       <footer className="bg-gray-900 text-white py-8">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">

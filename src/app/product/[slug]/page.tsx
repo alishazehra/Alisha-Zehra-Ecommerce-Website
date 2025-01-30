@@ -27,15 +27,19 @@ async function getProduct (slug: string):Promise<Product> {
 export default async function ProductPage ({params} : ProductPageProps){
   const  {slug} = await params;
   const product = await getProduct(slug)
-  const imageUrl = product.image?.asset?.url || "/path/to/fallback-image.jpg" // Fallback image if none exists
+  
 
-  function addToCart(product: Product): void {
-    throw new Error("Function not implemented.")
-  }
+  // function addToCart(product: Product): void {
+  //   throw new Error("Function not implemented.")
+  // }
 
   return (
+   
+
     
     <div className="max-w-7xl- mx-auto px-4"><div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+     
+
       <div className="aspect-square">{product.image && (
         <Image
           src={urlFor(product.image).url()}
