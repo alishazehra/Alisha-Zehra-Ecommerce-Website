@@ -3,4 +3,8 @@
 @tailwind utilities;
 
 
-    
+  .sign{
+    color:black;
+    font-size: larger;
+    text-decoration: underline;
+  }  

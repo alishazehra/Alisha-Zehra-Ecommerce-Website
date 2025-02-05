@@ -557,6 +557,7 @@ const ProductCards: React.FC = () => {
 
   return (
     <div className="p-4">
+ <Link href={"/auth/signup"}>     <div className=" sign "><h1 className="font-bold">Sign-up/Login!</h1></div> </Link>
       {/* Avion Header and Navigation */}
       <div>
         <h1 className="text-center text-3xl font-bold">Avion</h1>
@@ -567,7 +568,7 @@ const ProductCards: React.FC = () => {
           <li className="hover:text-blue-600"><Link href="/plantpots">Chairs</Link></li>
         </ul>
       </div>
-
+     
       {/* Search Bar */}
       <div className="mt-4 flex justify-center">
         <input
@@ -643,7 +644,7 @@ const ProductCards: React.FC = () => {
           </div>
         ))}
       </div>
-
+      
       {/* Cart Icon and Wishlist Icon */}
       <div className="absolute top-4 right-4 flex gap-4">
         {/* Cart Icon */}
@@ -670,7 +671,7 @@ const ProductCards: React.FC = () => {
           </span>
         </div>
       </div>
-
+      
       {/* Wishlist Modal */}
       {wishlistOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 z-10 flex justify-center items-center">
