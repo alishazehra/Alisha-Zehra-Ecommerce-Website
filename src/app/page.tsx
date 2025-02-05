@@ -1,14 +1,18 @@
 import React from 'react'
 import ProductCards from './cart/page'
-
-const Home = () => {
+const Page = () => {
   return (
     <div>
-     
-      <ProductCards/>  
-      
+      <ProductCards/>
     </div>
   )
 }
 
-export default Home
+export default Page
+
+
+
+
+
+
+
